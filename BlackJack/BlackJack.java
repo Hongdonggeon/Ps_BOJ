@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -128,30 +127,31 @@ public class BlackJack {
                     System.out.println("딜러의 BlackJack으로 패배했습니다.");
                     break;
                 }
-                if(is_bust(computeScoreDealer(table, dealer.getHand()))){
+                if (is_bust(computeScoreDealer(table, dealer.getHand()))) {
                     System.out.println("딜러 패의 총합이 21을 초과하여 승리했습니다.");
                     break;
                 }
-                if(computeScoreDealer(table,dealer.getHand()) > 17) {
+                if (computeScoreDealer(table, dealer.getHand()) > 17) {
                     System.out.println("딜러의 차례가 끝났습니다.");
                     break;
-                }
-                else if (computeScoreDealer(table, dealer.getHand()) <= 16) {
+                } else if (computeScoreDealer(table, dealer.getHand()) <= 16) {
                     dealer.addCard(deque.drawCard());
-                    System.out.println("딜러는 "+ dealer.get(dealer_num++) + "를 받았습니다.");
+                    System.out.println("딜러는 " + dealer.get(dealer_num++) + "를 받았습니다.");
                     System.out.println("당신의 카드는 " + dealer.getHand() + " 입니다.\n");
 
                 }
             }
-            int user_score = computeScoreUser(table, user.getHand())+a_chocie;
-            int dealer_score = computeScoreDealer(table, dealer.getHand());
-            System.out.println("유저: " + user_score + "vs" + "딜러: " + dealer_score);
-            if (user_score > dealer_score)
-                System.out.println("승리했습니다.");
-            else if (user_score == dealer_score)
-                System.out.println("무승부");
-            else
-                System.out.println("패배했습니다.");
+            if (!checkBlackjack(dealer.getHand()) && !is_bust(computeScoreDealer(table, user.getHand()))) {
+                int user_score = computeScoreUser(table, user.getHand()) + a_chocie;
+                int dealer_score = computeScoreDealer(table, dealer.getHand());
+                System.out.println("유저: " + user_score + "vs" + "딜러: " + dealer_score);
+                if (user_score > dealer_score)
+                    System.out.println("승리했습니다.");
+                else if (user_score == dealer_score)
+                    System.out.println("무승부");
+                else
+                    System.out.println("패배했습니다.");
+            }
         }
 
 
